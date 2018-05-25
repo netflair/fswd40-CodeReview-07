@@ -19,7 +19,7 @@ var place = /** @class */ (function () {
         this.city = city;
     }
     place.prototype.render = function () {
-        return "Image: " + this.image + " | Adress: " + this.address + " | ZIP: " + this.zip + " | City: " + this.city;
+        return "\n\t\t\t<div class=\"col-lg-6 border\">\n\t\t\t\t<div class=\"row no-gutters\">\n\t\t\t\t\t<div class=\"col-lg-5 border\">\n\t\t\t\t\t\t<img src=\"" + this.image + "\" alt=\"" + this.address + "-Image\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-7 border\">\n\t\t\t\t\t\t<address>\n\t\t\t\t\t\t\t" + this.address + "\n\t\t\t\t\t\t\t" + this.zip + "\n\t\t\t\t\t\t\t" + this.city + "\n\t\t\t\t\t\t</address>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t";
     };
     return place;
 }());
@@ -33,6 +33,9 @@ var restaurant = /** @class */ (function (_super) {
         _this.type = type;
         return _this;
     }
+    restaurant.prototype.render2 = function () {
+        return _super.prototype.render.call(this) + "TEL: " + this.tel + " | WEB: " + this.web + " | TYPE: " + this.type;
+    };
     return restaurant;
 }(place));
 //place > concert *cant use event = reserved in JS
@@ -53,7 +56,19 @@ var places = [
     new place("Pic1", "Address1", "Zip1", "City1"),
     new place("Pic2", "Address2", "Zip2", "City2")
 ];
+//Restaurants
+var restaurants = [
+    new restaurant("rpic1", "radd1", "rzip1", "rcity1", "tel1", "web1", "tpye1"),
+    new restaurant("rpic2", "radd2", "rzip2", "rcity2", "tel2", "web2", "tpye2")
+];
+//LOOP THROUGH ARRAYS AND OUTPUT ON PAGE -------------------------------------------------------------
+//Places
 for (var _i = 0, places_1 = places; _i < places_1.length; _i++) {
-    var value = places_1[_i];
-    console.log(value.render());
+    var pla = places_1[_i];
+    $('#test').append(pla.render());
+}
+//Restaurants
+for (var _a = 0, restaurants_1 = restaurants; _a < restaurants_1.length; _a++) {
+    var res = restaurants_1[_a];
+    console.log(res.render2());
 }
