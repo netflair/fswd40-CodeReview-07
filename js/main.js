@@ -10,9 +10,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 //INTERFACES FOR CLASSES -----------------------------------------------------------------------------
 //CLASSES ---------------------------------------------------------------------------------------------
-//SUPER place 
-var place = /** @class */ (function () {
-    function place(posted, title, image, address, zip, city) {
+var Attentions = /** @class */ (function () {
+    function Attentions(posted, title, image, address, zip, city) {
         this.posted = posted;
         this.title = title;
         this.image = image;
@@ -20,12 +19,23 @@ var place = /** @class */ (function () {
         this.zip = zip;
         this.city = city;
     }
-    place.prototype.render = function (details) {
-        if (details === void 0) { details = this.address + "<br>" + this.zip + this.city + "<br>"; }
+    Attentions.prototype.render = function (details) {
         $('#test').append("\n\t\t\t<div class=\"col-lg-3 col-md-6 col-12 entry\" data-posted=\"" + this.posted.getTime() + "\">\n\t\t\t\t<div class=\"row pic no-gutters\">\n\t\t\t\t\t<div class=\"col-lg-12 text-center\"><h4>" + this.title + "</h4></div>\n\t\t\t\t\t<div class=\"col-lg-12 d-none d-md-block\">\n\t\t\t\t\t\t<img class=\"img-fluid\" src=\"" + this.image + "\" alt=\"" + this.address + "-Image\">\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"col-lg-12 details border-top border-bottom\">\n\t\t\t\t\t\t" + details + "\n\t\t\t\t\t</div>\n\t\t\t\t\t<small class=\"posted\">Created: " + this.posted.toLocaleString("de-DE") + "</small>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t");
     };
-    return place;
+    return Attentions;
 }());
+//SUPER place 
+var place = /** @class */ (function (_super) {
+    __extends(place, _super);
+    function place(posted, title, image, address, zip, city) {
+        return _super.call(this, posted, title, image, address, zip, city) || this;
+    }
+    place.prototype.render = function (details) {
+        details = this.address + "<br>" + this.zip + this.city + "<br>";
+        _super.prototype.render.call(this, details);
+    };
+    return place;
+}(Attentions));
 //place > restaurant 
 var restaurant = /** @class */ (function (_super) {
     __extends(restaurant, _super);
@@ -41,7 +51,7 @@ var restaurant = /** @class */ (function (_super) {
         _super.prototype.render.call(this, details);
     };
     return restaurant;
-}(place));
+}(Attentions));
 //place > concert 
 var concert = /** @class */ (function (_super) {
     __extends(concert, _super);
@@ -57,7 +67,7 @@ var concert = /** @class */ (function (_super) {
         _super.prototype.render.call(this, details);
     };
     return concert;
-}(place));
+}(Attentions));
 //CREATE OBJECTS IN ARRAY ----------------------------------------------------------------------------
 var all = [
     new restaurant(new Date("2018-05-20T23:00"), "Soba Noodle Bar", "./img/noodlebar.jpg", "Rechte Wienzeile 37", "1040", "Vienna", "+43 1 286 57 60", "http://www.soba.wien/", "japanese"),
