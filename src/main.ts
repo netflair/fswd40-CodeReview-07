@@ -24,13 +24,12 @@ interface iConcert {
 
 
 //CLASSES ---------------------------------------------------------------------------------------------
+abstract class Attentions {
+	constructor(public posted, public title, public image, public address, public zip, public city ){
+	
+	}
 
-//SUPER place 
-class place implements iPlace{
-
-	constructor(public posted, public title, public image, public address, public zip, public city ){}
-
-	render(details = `${this.address}<br>${this.zip}${this.city}<br>`){
+	render(details) {
 
 		$('#test').append(`
 			<div class="col-lg-3 col-md-6 col-12 entry" data-posted="${this.posted.getTime()}">
@@ -46,13 +45,28 @@ class place implements iPlace{
 				</div>
 			</div>
 		`)
+
+	}
+}
+
+
+//SUPER place 
+class place extends Attentions implements iPlace{
+
+	constructor(posted, title, image, address, zip, city){
+		super (posted, title, image, address, zip, city);
+	}
+
+	render(details){
+		details = `${this.address}<br>${this.zip}${this.city}<br>`;
+		super.render(details);
 	}
 
 }
 
 
 //place > restaurant 
-class restaurant extends place implements iRestaurant {
+class restaurant extends Attentions implements iRestaurant {
 
 	constructor(posted, title, image, address, zip, city, public tel, public web, public type){
 		super(posted, title, image, address, zip, city);
@@ -76,7 +90,7 @@ class restaurant extends place implements iRestaurant {
 
 
 //place > concert 
-class concert extends place {
+class concert extends Attentions {
 
 	constructor(posted, title, image, address, zip, city, public date, public time, public price){
 		super(posted, title, image, address, zip, city);
