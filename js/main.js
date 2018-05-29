@@ -30,8 +30,8 @@ var place = /** @class */ (function (_super) {
     function place(posted, title, image, address, zip, city) {
         return _super.call(this, posted, title, image, address, zip, city) || this;
     }
-    place.prototype.render = function (details) {
-        details = this.address + "<br>" + this.zip + this.city + "<br>";
+    place.prototype.render = function () {
+        var details = this.address + "<br>" + this.zip + this.city + "<br>";
         _super.prototype.render.call(this, details);
     };
     return place;
@@ -46,8 +46,8 @@ var restaurant = /** @class */ (function (_super) {
         _this.type = type;
         return _this;
     }
-    restaurant.prototype.render = function (details) {
-        details = "\n\t\t\t" + this.address + "<br>\n\t\t\t" + this.zip + " " + this.city + "<br>\n\t\t\t" + this.tel + "<br>\n\t\t\t<a href=\"" + this.web + "\" target=\"_blank\">" + this.web + "</a><br>\n\t\t\t<small>" + this.type + "</small>\n\t\t";
+    restaurant.prototype.render = function () {
+        var details = "\n\t\t\t" + this.address + "<br>\n\t\t\t" + this.zip + " " + this.city + "<br>\n\t\t\t" + this.tel + "<br>\n\t\t\t<a href=\"" + this.web + "\" target=\"_blank\">" + this.web + "</a><br>\n\t\t\t<small>" + this.type + "</small>\n\t\t";
         _super.prototype.render.call(this, details);
     };
     return restaurant;
@@ -62,8 +62,8 @@ var concert = /** @class */ (function (_super) {
         _this.price = price;
         return _this;
     }
-    concert.prototype.render = function (details) {
-        details = "\n\t\t\t" + this.address + "<br>\n\t\t\t" + this.zip + " " + this.city + "<br>\n\t\t\t<strong>" + this.date + this.time + "</strong><br>\n\t\t\t<span class=\"float-right text-danger\">sold out <del>" + this.price + "</del></span>\n\t\t";
+    concert.prototype.render = function () {
+        var details = "\n\t\t\t" + this.address + "<br>\n\t\t\t" + this.zip + " " + this.city + "<br>\n\t\t\t<strong>" + this.date + this.time + "</strong><br>\n\t\t\t<span class=\"float-right text-danger\">sold out <del>" + this.price + "</del></span>\n\t\t";
         _super.prototype.render.call(this, details);
     };
     return concert;
@@ -80,8 +80,7 @@ var all = [
 //LOOP THROUGH ARRAY AND OUTPUT ON PAGE -------------------------------------------------------------
 for (var _i = 0, all_1 = all; _i < all_1.length; _i++) {
     var one = all_1[_i];
-    var details = void 0;
-    one.render(details);
+    one.render();
 }
 //SORTING-------------------------------------------------------------------------------------------
 //Ascending

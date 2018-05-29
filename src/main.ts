@@ -57,8 +57,8 @@ class place extends Attentions implements iPlace{
 		super (posted, title, image, address, zip, city);
 	}
 
-	render(details){
-		details = `${this.address}<br>${this.zip}${this.city}<br>`;
+	render(){
+		let details = `${this.address}<br>${this.zip}${this.city}<br>`;
 		super.render(details);
 	}
 
@@ -72,9 +72,9 @@ class restaurant extends Attentions implements iRestaurant {
 		super(posted, title, image, address, zip, city);
 	}
 
-	render(details) {
+	render() {
 
-		details = `
+		let details = `
 			${this.address}<br>
 			${this.zip} ${this.city}<br>
 			${this.tel}<br>
@@ -96,9 +96,9 @@ class concert extends Attentions {
 		super(posted, title, image, address, zip, city);
 	}
 
-	render(details) {
+	render() {
 
-		details = `
+		let details = `
 			${this.address}<br>
 			${this.zip} ${this.city}<br>
 			<strong>${this.date}${this.time}</strong><br>
@@ -130,8 +130,7 @@ let all = [
 //LOOP THROUGH ARRAY AND OUTPUT ON PAGE -------------------------------------------------------------
 
 for (let one of all){
-	let details;
-	one.render(details);
+	one.render();
 }
 
 
